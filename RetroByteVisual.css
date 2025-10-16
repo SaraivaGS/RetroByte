@@ -1,0 +1,211 @@
+body {
+    background-color: #141414; /* Um fundo quase preto */
+    color: #00ff41; /* Cor principal do texto (verde LED) */
+    font-family: 'Press Start 2P', cursive; /* A fonte pixelada para todo o site */
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+    text-transform: uppercase; /* Deixa todo o texto em maiúsculas para o estilo retrô */
+}
+
+/* --- O CONTAINER COMO UMA TELA DE TV --- */
+.container {
+    max-width: 800px;
+    width: 100%;
+    background-color: #1a1a1a;
+    border: 5px solid #333;
+    border-radius: 15px;
+    padding: 20px 40px;
+    box-shadow: 0 0 50px rgba(0, 255, 65, 0.4), /* Brilho externo da tela */
+                inset 0 0 20px rgba(0, 0, 0, 0.8); /* Sombra interna para profundidade */
+    position: relative;
+    overflow: hidden; /* Garante que os efeitos fiquem dentro da "tela" */
+}
+
+/* --- EFEITO DE SCANLINES (LINHAS DE TV) --- */
+.container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2) 0px,
+        rgba(0, 0, 0, 0.3) 1px,
+        transparent 2px,
+        transparent 4px
+    );
+    pointer-events: none;
+    z-index: 1;
+    animation: flicker 0.15s infinite;
+}
+
+/* --- EFEITO DE RUÍDO ESTÁTICO SUTIL --- */
+.container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 500 500' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0.04;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* --- ESTILO GERAL PARA TEXTOS COM EFEITO LED --- */
+h1, h2, h3, h4, p, li, a {
+    text-shadow:
+        0 0 5px rgba(0, 255, 65, 0.8),
+        0 0 10px rgba(0, 255, 65, 0.6),
+        0 0 20px rgba(0, 255, 65, 0.4);
+    animation: chromatic-aberration 1.5s infinite;
+    position: relative; /* Necessário para o texto ficar acima dos efeitos */
+    z-index: 3;
+}
+
+/* --- AJUSTES DE TAMANHO E ESPAÇAMENTO --- */
+h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #adff2f; /* Um verde-limão mais claro para o título principal */
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-top: 40px;
+    border-bottom: 2px solid rgba(0, 255, 65, 0.5);
+    padding-bottom: 10px;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+p {
+    font-size: 0.5em;
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: '» '; /* Adiciona um marcador de lista temático */
+    padding-left: 20px;
+}
+
+li {
+    font-size: 0.7em;
+    margin-bottom: 5px;
+}
+
+/* --- ESTILO PARA OS CARDS DE JOGO --- */
+.jogo-card {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid #333;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+}
+
+.capa-jogo {
+    display: block;
+    max-width: 250px;
+    width: 100%;
+    margin: 15px auto;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 5px #121212;
+    
+    /* Filtro para dar um visual de tela antiga à imagem */
+    filter: saturate(0.8) contrast(1.1) brightness(0.9);
+    transition: transform 0.3s ease;
+}
+
+.capa-jogo:hover {
+    transform: scale(1.05); /* Efeito de zoom na imagem */
+}
+
+/* --- ESTILO PARA OS BOTÕES DE DOWNLOAD --- */
+.botao-download {
+    display: block;
+    width: 95%; 
+    padding: 15px; 
+    margin-top: 10px; 
+    text-align: center;
+    font-size: 0.9em; 
+    text-decoration: none;
+    border-radius: 5px; 
+    transition: all 0.2s ease-in-out; 
+}
+
+.botao-download.anuncio {
+    background-color: #b38600;
+    color: #fff;
+    border: 2px solid #ffbf00;
+    text-shadow: 0 0 5px #ffbf00;
+}
+
+.botao-download.anuncio:hover {
+    background-color: #ffbf00;
+    color: #000;
+    box-shadow: 0 0 20px #ffbf00;
+}
+
+.botao-download.direto {
+    background-color: #005a00;
+    color: #fff;
+    border: 2px solid #00ff00;
+    text-shadow: 0 0 5px #00ff00;
+}
+
+.botao-download.direto:hover {
+    background-color: #00ff00;
+    color: #000;
+    box-shadow: 0 0 20px #00ff00;
+}
+
+/* --- LINHA HORIZONTAL ESTILIZADA --- */
+hr {
+    border: none;
+    height: 2px;
+    background: repeating-linear-gradient(90deg,
+        rgba(0,255,65,0.7) 0%,
+        rgba(0,255,65,0.7) 50%,
+        transparent 50%,
+        transparent 100%);
+    background-size: 10px 1px;
+    margin: 40px 0;
+}
+
+/* --- ANIMAÇÕES --- */
+
+/* Tremulação sutil da tela */
+@keyframes flicker {
+    0% { opacity: 0.95; }
+    50% { opacity: 1; }
+    100% { opacity: 0.95; }
+}
+
+/* Aberração cromática para o texto */
+@keyframes chromatic-aberration {
+    0% {
+        text-shadow:
+            0 0 5px rgba(0, 255, 65, 0.8),
+            1px 0 0 rgba(255, 0, 0, 0.7),
+            -1px 0 0 rgba(0, 0, 255, 0.7);
+    }
+    50% {
+        text-shadow:
+            0 0 5px rgba(0, 255, 65, 0.8),
+            -0.5px 0 0 rgba(255, 0, 0, 0.7),
+            0.5px 0 0 rgba(0, 0, 255, 0.7);
+    }
+    100% {
+        text-shadow:
+            0 0 5px rgba(0, 255, 65, 0.8),
+            1px 0 0 rgba(255, 0, 0, 0.7),
+            -1px 0 0 rgba(0, 0, 255, 0.7);
+    }
+}
